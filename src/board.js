@@ -44,11 +44,22 @@ export function createBoard(width, height) {
       board.ships.forEach((ship) => {
         if (hitCoord === ship.name) {
           ship.hit();
+          board.fleetSunk();
         }
       });
       hitCoord = 'hit';
     }
     return (board.grid[y - 1][x - 1] = hitCoord);
+  };
+
+  board.fleetSunk = function () {
+    let fleetDestroyed = true;
+    board.ships.forEach((ship) => {
+      if (ship.isSunk === false) {
+        fleetDestroyed = false;
+      }
+    });
+    return fleetDestroyed;
   };
 
   return board;

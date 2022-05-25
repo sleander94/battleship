@@ -56,3 +56,12 @@ test('Receive attack at empty coordinate and register miss', () => {
   testBoard.receiveAttack(1, 1);
   expect(testBoard.grid[0][0]).toBe('miss');
 });
+
+test('Check if all ships on board are sunk', () => {
+  testBoard.addShip(3, 1, 1);
+  testBoard.receiveAttack(1, 1);
+  testBoard.receiveAttack(2, 1);
+  expect(testBoard.fleetSunk()).toBeFalsy();
+  testBoard.receiveAttack(3, 1);
+  expect(testBoard.fleetSunk()).toBeTruthy();
+});
