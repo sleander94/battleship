@@ -2,9 +2,9 @@ import { createShip } from './ship';
 
 export function createBoard(width, height) {
   let board = {};
+  let ships = [];
   board.width = width;
   board.height = height;
-  board.cells = width * height;
 
   board.grid = [];
   for (let i = 0; i < height; i++) {
@@ -17,13 +17,11 @@ export function createBoard(width, height) {
   }
 
   board.addShip = function (length, x, y) {
-    let newShip = createShip(length);
-
+    let ship = createShip(length);
+    ships.push(ship);
     for (let i = 0; i < length; i++) {
-      board.grid[y - 1][x - 1 + i] = newShip.name;
+      board.grid[y - 1][x - 1 + i] = ship.name;
     }
-
-    return newShip;
   };
 
   return board;
