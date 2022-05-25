@@ -6,13 +6,7 @@ beforeEach(() => {
 });
 
 test('Create new ship object with specified length', () => {
-  expect(testShip).toMatchObject({
-    length: 3,
-    hitCount: 0,
-    isSunk: false,
-    hit: expect.any(Function),
-    checkSunk: expect.any(Function),
-  });
+  expect(testShip.length).toBe(3);
 });
 
 test('Mark ship as sunk when hitCount = length', () => {
