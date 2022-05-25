@@ -19,6 +19,15 @@ test('Add ship to board at specified coordinates', () => {
   expect(testBoard.grid[3][7]).toBe('');
 });
 
+test('Add ship vertically', () => {
+  testBoard.addShip(3, 5, 5, 'vertical');
+  expect(testBoard.grid[4][5]).toBe('');
+  expect(testBoard.grid[4][3]).toBe('');
+  expect(testBoard.grid[4][4]).toBe('Cruiser');
+  expect(testBoard.grid[5][4]).toBe('Cruiser');
+  expect(testBoard.grid[6][4]).toBe('Cruiser');
+});
+
 test('Receive attack at occupied coordinate and register hit', () => {
   testBoard.addShip(3, 1, 1);
   testBoard.receiveAttack(1, 1);

@@ -16,11 +16,17 @@ export function createBoard(width, height) {
     board.grid.push(row);
   }
 
-  board.addShip = function (length, x, y) {
+  board.addShip = function (length, x, y, vert) {
     let ship = createShip(length);
     board.ships.push(ship);
-    for (let i = 0; i < length; i++) {
-      board.grid[y - 1][x - 1 + i] = ship.name;
+    if (vert) {
+      for (let i = 0; i < length; i++) {
+        board.grid[y - 1 + i][x - 1] = ship.name;
+      }
+    } else {
+      for (let i = 0; i < length; i++) {
+        board.grid[y - 1][x - 1 + i] = ship.name;
+      }
     }
   };
 
