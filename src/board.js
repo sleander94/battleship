@@ -1,15 +1,15 @@
 import { createShip } from './ship';
 
-export function createBoard(width, height) {
+export function createBoard() {
   let board = {};
   board.ships = [];
-  board.width = width;
-  board.height = height;
+  board.width = 10;
+  board.height = 10;
 
   board.grid = [];
-  for (let i = 0; i < height; i++) {
+  for (let i = 0; i < board.height; i++) {
     let row = [];
-    for (let i = 0; i < width; i++) {
+    for (let i = 0; i < board.width; i++) {
       let cell = '';
       row.push(cell);
     }

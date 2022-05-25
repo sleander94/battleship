@@ -2,10 +2,10 @@ import { createBoard } from './board';
 let testBoard;
 
 beforeEach(() => {
-  testBoard = createBoard(10, 10);
+  testBoard = createBoard();
 });
 
-test('Generate empty grid with specified dimensions', () => {
+test('Generate empty grid with correct dimensions', () => {
   expect(testBoard.grid.length).toBe(10);
   expect(testBoard.grid[0].length).toBe(10);
 });
