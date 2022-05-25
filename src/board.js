@@ -16,7 +16,7 @@ export function createBoard(width, height) {
     board.grid.push(row);
   }
 
-  board.addShip = function (length, x, y, vert) {
+  board.addShip = (length, x, y, vert) => {
     let ship = createShip(length);
     board.ships.push(ship);
     if (vert) {
@@ -44,7 +44,7 @@ export function createBoard(width, height) {
     }
   };
 
-  board.receiveAttack = function (x, y) {
+  board.receiveAttack = (x, y) => {
     let hitCoord = board.grid[y - 1][x - 1];
     if (hitCoord === '') {
       hitCoord = 'miss';
@@ -60,7 +60,7 @@ export function createBoard(width, height) {
     return (board.grid[y - 1][x - 1] = hitCoord);
   };
 
-  board.fleetSunk = function () {
+  board.fleetSunk = () => {
     let fleetDestroyed = true;
     board.ships.forEach((ship) => {
       if (ship.isSunk === false) {

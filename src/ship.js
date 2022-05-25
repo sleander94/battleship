@@ -17,12 +17,12 @@ export function createShip(length) {
     ship.name = 'Aircraft Carrier';
   }
 
-  ship.hit = function () {
+  ship.hit = () => {
     ship.hitCount += 1;
     ship.checkSunk();
   };
 
-  ship.checkSunk = function () {
+  ship.checkSunk = () => {
     if (ship.hitCount === ship.length) {
       ship.isSunk = true;
     }
