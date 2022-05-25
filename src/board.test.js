@@ -19,6 +19,18 @@ test('Add ship to board at specified coordinates', () => {
   expect(testBoard.grid[3][7]).toBe('');
 });
 
+test('Prevent horizontal ship placement if it overflows board', () => {
+  expect(testBoard.addShip(3, 8, 8));
+  expect(() => testBoard.addShip(3, 9, 9)).toThrow('Placement out of bounds');
+});
+
+test('Prevent vertical ship placement if it overflows board', () => {
+  expect(testBoard.addShip(3, 8, 8, 'vertical'));
+  expect(() => testBoard.addShip(3, 9, 9, 'vertical')).toThrow(
+    'Placement out of bounds'
+  );
+});
+
 test('Add ship vertically', () => {
   testBoard.addShip(3, 5, 5, 'vertical');
   expect(testBoard.grid[4][5]).toBe('');

@@ -21,10 +21,16 @@ export function createBoard(width, height) {
     board.ships.push(ship);
     if (vert) {
       for (let i = 0; i < length; i++) {
+        if (!board.grid[y - 1 + i]) {
+          throw 'Placement out of bounds';
+        }
         board.grid[y - 1 + i][x - 1] = ship.name;
       }
     } else {
       for (let i = 0; i < length; i++) {
+        if (board.grid[y - 1][x - 1 + i] === undefined) {
+          throw 'Placement out of bounds';
+        }
         board.grid[y - 1][x - 1 + i] = ship.name;
       }
     }
