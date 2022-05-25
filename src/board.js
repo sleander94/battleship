@@ -46,9 +46,6 @@ export function createBoard() {
 
   board.receiveAttack = (x, y) => {
     let hitCoord = board.grid[y - 1][x - 1];
-    if (hitCoord === 'miss' || hitCoord === 'hit') {
-      throw 'Space already attacked';
-    }
     if (hitCoord === '') {
       hitCoord = 'miss';
     } else {
