@@ -68,6 +68,14 @@ test('Receive attack at empty coordinate and register miss', () => {
   expect(testBoard.grid[0][0]).toBe('miss');
 });
 
+test('Throw error if space is attacked more than once', () => {
+  testBoard.addShip(3, 1, 1);
+  testBoard.receiveAttack(1, 1);
+  testBoard.receiveAttack(1, 2);
+  expect(() => testBoard.receiveAttack(1, 1)).toThrow('Space already attacked');
+  expect(() => testBoard.receiveAttack(1, 2)).toThrow('Space already attacked');
+});
+
 test('Check if all ships on board are sunk', () => {
   testBoard.addShip(3, 1, 1);
   testBoard.receiveAttack(1, 1);
