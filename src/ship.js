@@ -6,15 +6,15 @@ export function createShip(length) {
   ship.isSunk = false;
 
   if (ship.length === 1) {
-    ship.name = 'Submarine';
+    ship.name = 'submarine';
   } else if (ship.length === 2) {
-    ship.name = 'Destroyer';
+    ship.name = 'destroyer';
   } else if (ship.length === 3) {
-    ship.name = 'Cruiser';
+    ship.name = 'cruiser';
   } else if (ship.length === 4) {
-    ship.name = 'Battleship';
+    ship.name = 'battleship';
   } else if (ship.length === 5) {
-    ship.name = 'Aircraft Carrier';
+    ship.name = 'carrier';
   }
 
   ship.hit = () => {

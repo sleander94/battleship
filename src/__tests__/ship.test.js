@@ -10,11 +10,11 @@ test('Create new ship object with specified length', () => {
 });
 
 test('Name ship according to length', () => {
-  expect(createShip(1).name).toBe('Submarine');
-  expect(createShip(2).name).toBe('Destroyer');
-  expect(createShip(3).name).toBe('Cruiser');
-  expect(createShip(4).name).toBe('Battleship');
-  expect(createShip(5).name).toBe('Aircraft Carrier');
+  expect(createShip(1).name).toBe('submarine');
+  expect(createShip(2).name).toBe('destroyer');
+  expect(createShip(3).name).toBe('cruiser');
+  expect(createShip(4).name).toBe('battleship');
+  expect(createShip(5).name).toBe('carrier');
 });
 
 test('Mark ship as sunk when hitCount = length', () => {

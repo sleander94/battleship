@@ -13,9 +13,9 @@ test('Generate empty grid with correct dimensions', () => {
 test('Add ship to board at specified coordinates', () => {
   testBoard.addShip(3, 5, 4);
   expect(testBoard.grid[3][3]).toBe('');
-  expect(testBoard.grid[3][4]).toBe('Cruiser');
-  expect(testBoard.grid[3][5]).toBe('Cruiser');
-  expect(testBoard.grid[3][6]).toBe('Cruiser');
+  expect(testBoard.grid[3][4]).toBe('cruiser');
+  expect(testBoard.grid[3][5]).toBe('cruiser');
+  expect(testBoard.grid[3][6]).toBe('cruiser');
   expect(testBoard.grid[3][7]).toBe('');
 });
 
@@ -46,9 +46,9 @@ test('Add ship vertically', () => {
   testBoard.addShip(3, 5, 5, 'vertical');
   expect(testBoard.grid[4][5]).toBe('');
   expect(testBoard.grid[4][3]).toBe('');
-  expect(testBoard.grid[4][4]).toBe('Cruiser');
-  expect(testBoard.grid[5][4]).toBe('Cruiser');
-  expect(testBoard.grid[6][4]).toBe('Cruiser');
+  expect(testBoard.grid[4][4]).toBe('cruiser');
+  expect(testBoard.grid[5][4]).toBe('cruiser');
+  expect(testBoard.grid[6][4]).toBe('cruiser');
 });
 
 test('Receive attack at occupied coordinate and register hit', () => {
