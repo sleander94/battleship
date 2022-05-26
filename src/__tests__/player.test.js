@@ -23,7 +23,12 @@ test("Player can attack opponent's board at specified coordinates", () => {
   expect(testPlayer2.board.grid[0][0]).toBe('miss');
 });
 
-test('Make random attack if player type is computer', () => {
+test('Cannot attack previously attacked space', () => {
+  testPlayer1.makeAttack(testPlayer2, 1, 1);
+  expect(testPlayer1.makeAttack(testPlayer2, 1, 1)).toBe(undefined);
+});
+
+test('Make attack without x, y parameters if player type is computer', () => {
   testPlayer2.makeAttack(testPlayer1);
   let attackCounter = 0;
   for (let i = 0; i < 10; i++) {
@@ -33,5 +38,3 @@ test('Make random attack if player type is computer', () => {
     }
   }
 });
-
-// continue attacking if space has been attacked
