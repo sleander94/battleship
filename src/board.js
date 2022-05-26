@@ -52,10 +52,10 @@ export function createBoard() {
       board.ships.forEach((ship) => {
         if (hitCoord === ship.name) {
           ship.hit();
+          hitCoord = 'hit';
           board.fleetSunk();
         }
       });
-      hitCoord = 'hit';
     }
     return (board.grid[y - 1][x - 1] = hitCoord);
   };
