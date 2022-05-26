@@ -1,9 +1,8 @@
 import { createBoard } from './board';
 
-export function createPlayer(name, type) {
+export function createPlayer(type) {
   let player = {};
 
-  player.name = name;
   player.type = type;
   player.board = createBoard();
 

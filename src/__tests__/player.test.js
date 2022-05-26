@@ -4,13 +4,13 @@ let testPlayer1;
 let testPlayer2;
 
 beforeEach(() => {
-  testPlayer1 = createPlayer('foo', 'human');
-  testPlayer2 = createPlayer('bar', 'computer');
+  testPlayer1 = createPlayer('human');
+  testPlayer2 = createPlayer('computer');
 });
 
-test('Player has name & type properties with value of parameters', () => {
-  expect(testPlayer1.name).toBe('foo');
+test('Player has type property with value of parameter', () => {
   expect(testPlayer1.type).toBe('human');
+  expect(testPlayer2.type).toBe('computer');
 });
 
 test('Player has empty board on creation', () => {
