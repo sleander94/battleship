@@ -1,10 +1,6 @@
 import './style.css';
 import { createPlayer } from './player';
-import {
-  listenForAttack,
-  renderBoard,
-  createGameArea,
-} from './dom-interaction';
+import { startAttackLoop, renderBoard, renderPage } from './dom-interaction';
 
 (function gameLoop() {
   let players = [];
@@ -13,7 +9,7 @@ import {
   players.push(human);
   players.push(computer);
 
-  createGameArea(document.body);
+  renderPage(document.body);
 
   players.forEach((player) => {
     for (let i = 1; i <= 5; i++) {
@@ -22,5 +18,5 @@ import {
     renderBoard(player, document.querySelector('.gameArea'));
   });
 
-  listenForAttack(human, computer, document.querySelector('.gameArea'));
+  startAttackLoop(human, computer, document.querySelector('.gameArea'));
 })();
