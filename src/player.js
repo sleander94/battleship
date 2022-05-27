@@ -29,7 +29,8 @@ export function createPlayer(type) {
         opponent.board.grid[y - 1][x - 1] !== 'miss' &&
         opponent.board.grid[y - 1][x - 1] !== 'hit'
       ) {
-        return opponent.board.receiveAttack(x, y);
+        opponent.board.receiveAttack(x, y);
+        return true;
       }
     }
   };
