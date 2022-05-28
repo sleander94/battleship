@@ -22,6 +22,7 @@ import {
   });
 
   placeFleet(human, document.getElementById('human'), 5);
+  placeRandomFleet(computer, document.getElementById('computer'), 5);
 
   startAttackLoop(human, computer, document.querySelector('.gameArea'));
 })();

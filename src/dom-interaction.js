@@ -169,14 +169,24 @@ function placeNextShip(player, element, length) {
   placeFleet(player, element, length);
 }
 
-export function placeRandomFleet(player, element) {
-  for (let i = 5; i > 0; i++) {
-    let x = randomCoord();
-    console.log(x);
-    let y = randomCoord();
-    console.log(y);
-    player.board.addShip(1, 1, 1);
+export function placeRandomFleet(player, element, length) {
+  let vert = randomCoord();
+  if (vert > 5) {
+    vert = true;
+  } else {
+    vert = false;
   }
+  let x = randomCoord();
+  let y = randomCoord();
+  if (player.board.addShip(length, x, y, vert) !== false) {
+    player.board.addShip(length, x, y, vert);
+    if (length > 0) {
+      placeRandomFleet(player, element, length - 1);
+    }
+  } else if (length > 0) {
+    placeRandomFleet(player, element, length);
+  }
+
   updateBoard(player, element);
 }
 
