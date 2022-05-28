@@ -180,13 +180,12 @@ export function placeRandomFleet(player, element, length) {
   let y = randomCoord();
   if (player.board.addShip(length, x, y, vert) !== false) {
     player.board.addShip(length, x, y, vert);
-    if (length > 0) {
+    if (length > 1) {
       placeRandomFleet(player, element, length - 1);
     }
-  } else if (length > 0) {
+  } else if (length > 1) {
     placeRandomFleet(player, element, length);
   }
-
   updateBoard(player, element);
 }
 
