@@ -1,3 +1,4 @@
+import { gameLoop } from './game';
 import { randomCoord } from './player';
 
 export function renderPage(element) {
@@ -126,14 +127,22 @@ function renderWinMessage(player, element) {
   } else if (player.type === 'human') {
     element.textContent = 'You have destroyed the enemy fleet. You win.';
   }
+  const playAgain = document.createElement('button');
+  playAgain.classList.toggle('startButton');
+  playAgain.textContent = 'New Game';
+  playAgain.addEventListener('click', () => {
+    gameLoop();
+  });
+  element.appendChild(playAgain);
 }
 
 let vertical = false;
-export function placeFleet(player, element, length) {
+export function placeFleet(player, opponent, element, length) {
   const messageContainer = document.querySelector('.messageContainer');
   fleetMessage(length, messageContainer);
   if (length <= 0) {
     removePlacementListeners(player);
+    startAttackLoop(player, opponent, document.querySelector('.gameArea'));
   } else {
     axisButton(messageContainer);
     const playerBoard = document.getElementById(`${player.type}`);
@@ -157,10 +166,10 @@ export function placeFleet(player, element, length) {
               vertical
             );
             if (length > 0) {
-              placeNextShip(player, element, length - 1);
+              placeNextShip(player, opponent, element, length - 1);
             }
           } else if (length > 0) {
-            placeNextShip(player, element, length);
+            placeNextShip(player, opponent, element, length);
           }
         });
       }
@@ -201,9 +210,9 @@ function removePlacementListeners(player) {
   }
 }
 
-function placeNextShip(player, element, length) {
+function placeNextShip(player, opponent, element, length) {
   updateBoard(player, element);
-  placeFleet(player, element, length);
+  placeFleet(player, opponent, element, length);
 }
 
 export function placeRandomFleet(player, element, length) {
