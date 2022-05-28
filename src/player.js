@@ -34,7 +34,7 @@ export function createPlayer(type) {
 
 export function randomCoord() {
   return (
-    Math.floor(Math.random() * (Math.floor(9) - Math.ceil(1) + 1)) +
+    Math.floor(Math.random() * (Math.floor(10) - Math.ceil(1) + 1)) +
     Math.ceil(1)
   );
 }
