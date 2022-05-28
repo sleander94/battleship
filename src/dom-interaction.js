@@ -99,8 +99,10 @@ export function startAttackLoop(player, opponent, element) {
         renderBoard(opponent, element);
         if (checkWinner(player, opponent) === 'computer') {
           renderWinMessage(opponent, messageContainer);
+          return true;
         } else if (checkWinner(player, opponent) === 'human') {
           renderWinMessage(player, messageContainer);
+          return true;
         } else {
           startAttackLoop(player, opponent, element);
         }
@@ -130,15 +132,49 @@ let vertical = false;
 export function placeFleet(player, element, length) {
   const messageContainer = document.querySelector('.messageContainer');
   fleetMessage(length, messageContainer);
-  if (length > 0) {
+  if (length <= 0) {
+    removePlacementListeners(player);
+  } else {
     axisButton(messageContainer);
+    const playerBoard = document.getElementById(`${player.type}`);
+    const rows = playerBoard.children;
+    for (let i = 0; i < rows.length; i++) {
+      for (let n = 0; n < rows[i].children.length; n++) {
+        let cell = rows[i].children[n];
+        cell.addEventListener('click', () => {
+          if (
+            player.board.addShip(
+              length,
+              cell.getAttribute('x'),
+              cell.getAttribute('y'),
+              vertical
+            ) !== false
+          ) {
+            player.board.addShip(
+              length,
+              cell.getAttribute('x'),
+              cell.getAttribute('y'),
+              vertical
+            );
+            if (length > 0) {
+              placeNextShip(player, element, length - 1);
+            }
+          } else if (length > 0) {
+            placeNextShip(player, element, length);
+          }
+        });
+      }
+    }
   }
+}
+
+function removePlacementListeners(player) {
   const playerBoard = document.getElementById(`${player.type}`);
   const rows = playerBoard.children;
   for (let i = 0; i < rows.length; i++) {
     for (let n = 0; n < rows[i].children.length; n++) {
       let cell = rows[i].children[n];
-      cell.addEventListener('click', () => {
+      cell.removeEventListener('click', () => {
         if (
           player.board.addShip(
             length,
@@ -153,10 +189,11 @@ export function placeFleet(player, element, length) {
             cell.getAttribute('y'),
             vertical
           );
-          if (length > 0) {
+          console.log(player.board.ships);
+          if (length > 1) {
             placeNextShip(player, element, length - 1);
           }
-        } else if (length > 0) {
+        } else if (length > 1) {
           placeNextShip(player, element, length);
         }
       });
