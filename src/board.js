@@ -73,33 +73,3 @@ export function createBoard() {
 
   return board;
 }
-
-/* let ship = createShip(length);
-if (vert) {
-  for (let i = 0; i < length; i++) {
-    if (!board.grid[y - 1 + i] || board.grid[y - 1 + i][x - 1] !== '') {
-      return false;
-    } 
-   else {
-    for (let i = 0; i < length; i++) {
-      board.grid[y - 1 + i][x - 1] = ship.name;
-    }
-    board.ships.push(ship);
-    return true;
-  }
-}
-} else {
-  for (let i = 0; i < length; i++) {
-    if (board.grid[y - 1][x - 1 + i] === undefined || board.grid[y - 1][x - 1 + i] !== '') {
-      return false
-    } 
-   else {
-    for (let i = 0; i < length; i++) {
-      board.grid[y - 1][x - 1 + i] = ship.name;
-    }
-    board.ships.push(ship);
-      return true;
-  }
-}
-};
-} */
