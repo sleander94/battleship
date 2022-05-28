@@ -1,3 +1,5 @@
+import { randomCoord } from './player';
+
 export function renderPage(element) {
   const header = document.createElement('h1');
   header.textContent = 'Battleship';
@@ -17,7 +19,7 @@ export function renderBoard(player, element) {
   const boardHeader = document.createElement('div');
   boardHeader.classList.toggle('boardHeader');
   if (player.type === 'computer') {
-    boardHeader.textContent = 'Enemy Enemy';
+    boardHeader.textContent = 'Enemy Fleet';
   } else {
     boardHeader.textContent = 'Your Fleet';
   }
@@ -48,10 +50,32 @@ export function renderBoard(player, element) {
   element.appendChild(boardDiv);
 }
 
+function updateBoard(player, element) {
+  element.innerHTML = '';
+  player.board.grid.forEach((row) => {
+    const rowDiv = document.createElement('div');
+    rowDiv.classList.toggle('row');
+    let i = 1;
+    row.forEach((cell) => {
+      const cellDiv = document.createElement('div');
+      cellDiv.classList.toggle('cell');
+      if (cell !== '') {
+        cellDiv.classList.toggle(`${cell}`);
+      }
+      cellDiv.setAttribute('y', `${player.board.grid.indexOf(row) + 1}`);
+      cellDiv.setAttribute('x', `${i}`);
+      cellDiv.innerHTML = cell;
+      rowDiv.appendChild(cellDiv);
+      i += 1;
+    });
+    element.appendChild(rowDiv);
+  });
+}
+
 export function startAttackLoop(player, opponent, element) {
   const messageContainer = document.querySelector('.messageContainer');
-  let opponentBoard = document.getElementById(`${opponent.type}`);
-  let rows = opponentBoard.children;
+  const opponentBoard = document.getElementById(`${opponent.type}`);
+  const rows = opponentBoard.children;
   for (let i = 0; i < rows.length; i++) {
     for (let n = 0; n < rows[i].children.length; n++) {
       let cell = rows[i].children[n];
@@ -94,11 +118,94 @@ function checkWinner(player, computer) {
 }
 
 function renderWinMessage(player, element) {
-  const message = document.createElement('div');
+  element.innerText = '';
   if (player.type === 'computer') {
-    message.textContent = 'Your fleet is destroyed. You lose.';
+    element.textContent = 'Your fleet is destroyed. You lose.';
   } else if (player.type === 'human') {
-    message.textContent = 'You have destroyed the enemy fleet. You win.';
+    element.textContent = 'You have destroyed the enemy fleet. You win.';
   }
-  element.appendChild(message);
+}
+
+let vertical = false;
+export function placeFleet(player, element, length) {
+  const messageContainer = document.querySelector('.messageContainer');
+  fleetMessage(length, messageContainer);
+  if (length > 0) {
+    axisButton(messageContainer);
+  }
+  const playerBoard = document.getElementById(`${player.type}`);
+  const rows = playerBoard.children;
+  for (let i = 0; i < rows.length; i++) {
+    for (let n = 0; n < rows[i].children.length; n++) {
+      let cell = rows[i].children[n];
+      cell.addEventListener('click', () => {
+        if (
+          player.board.addShip(
+            length,
+            cell.getAttribute('x'),
+            cell.getAttribute('y'),
+            vertical
+          ) !== false
+        ) {
+          player.board.addShip(
+            length,
+            cell.getAttribute('x'),
+            cell.getAttribute('y'),
+            vertical
+          );
+          if (length > 0) {
+            placeNextShip(player, element, length - 1);
+          }
+        } else if (length > 0) {
+          placeNextShip(player, element, length);
+        }
+      });
+    }
+  }
+}
+
+function placeNextShip(player, element, length) {
+  updateBoard(player, element);
+  placeFleet(player, element, length);
+}
+
+export function placeRandomFleet(player, element) {
+  for (let i = 5; i > 0; i++) {
+    let x = randomCoord();
+    console.log(x);
+    let y = randomCoord();
+    console.log(y);
+    player.board.addShip(1, 1, 1);
+  }
+  updateBoard(player, element);
+}
+
+function fleetMessage(length, element) {
+  if (length === 5) {
+    element.innerHTML = 'Place your Carrier';
+  } else if (length === 4) {
+    element.innerHTML = 'Place your Battleship';
+  } else if (length === 3) {
+    element.innerHTML = 'Place your Cruiser';
+  } else if (length === 2) {
+    element.innerHTML = 'Place your Destroyer';
+  } else if (length === 1) {
+    element.innerHTML = 'Place your Submarine';
+  } else {
+    element.innerHTML = 'Launch your attack!';
+  }
+}
+
+function axisButton(element) {
+  const axisButton = document.createElement('button');
+  axisButton.classList.toggle('axisButton');
+  axisButton.innerText = 'Change Axis';
+  axisButton.addEventListener('click', () => {
+    if (vertical === false) {
+      vertical = true;
+    } else {
+      vertical = false;
+    }
+  });
+  element.appendChild(axisButton);
 }

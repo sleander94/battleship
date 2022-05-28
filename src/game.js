@@ -1,6 +1,12 @@
 import './style.css';
 import { createPlayer } from './player';
-import { startAttackLoop, renderBoard, renderPage } from './dom-interaction';
+import {
+  startAttackLoop,
+  renderBoard,
+  renderPage,
+  placeFleet,
+  placeRandomFleet,
+} from './dom-interaction';
 
 (function gameLoop() {
   let players = [];
@@ -12,11 +18,10 @@ import { startAttackLoop, renderBoard, renderPage } from './dom-interaction';
   renderPage(document.body);
 
   players.forEach((player) => {
-    for (let i = 1; i <= 5; i++) {
-      player.board.addShip(i, 1, i);
-    }
     renderBoard(player, document.querySelector('.gameArea'));
   });
+
+  placeFleet(human, document.getElementById('human'), 5);
 
   startAttackLoop(human, computer, document.querySelector('.gameArea'));
 })();
