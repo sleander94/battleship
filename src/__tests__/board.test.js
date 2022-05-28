@@ -23,23 +23,24 @@ test('Prevent ship placement if space is occupied by another ship', () => {
   testBoard.addShip(3, 1, 1);
   expect(testBoard.addShip(3, 1, 2));
   expect(testBoard.addShip(3, 4, 1, 'vertical'));
-  expect(() => testBoard.addShip(3, 1, 1)).toThrow('Space is occupied');
-  expect(() => testBoard.addShip(3, 2, 1)).toThrow('Space is occupied');
-  expect(() => testBoard.addShip(3, 2, 1, 'vertical')).toThrow(
-    'Space is occupied'
-  );
+  expect(testBoard.ships.length).toBe(3);
+  testBoard.addShip(3, 1, 1);
+
+  testBoard.addShip(3, 2, 1);
+  testBoard.addShip(3, 2, 1, 'vertical');
+  expect(testBoard.ships.length).toBe(3);
 });
 
 test('Prevent horizontal ship placement if it overflows board', () => {
   expect(testBoard.addShip(3, 8, 8));
-  expect(() => testBoard.addShip(3, 9, 9)).toThrow('Placement out of bounds');
+  testBoard.addShip(3, 9, 9);
+  expect(testBoard.ships.length).toBe(1);
 });
 
 test('Prevent vertical ship placement if it overflows board', () => {
   expect(testBoard.addShip(3, 8, 8, 'vertical'));
-  expect(() => testBoard.addShip(3, 9, 9, 'vertical')).toThrow(
-    'Placement out of bounds'
-  );
+  testBoard.addShip(3, 9, 9, 'vertical');
+  expect(testBoard.ships.length).toBe(1);
 });
 
 test('Add ship vertically', () => {
