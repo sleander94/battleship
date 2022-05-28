@@ -8,12 +8,6 @@ export function createPlayer(type) {
 
   player.makeAttack = (opponent, x, y) => {
     if (player.type === 'computer') {
-      function randomCoord() {
-        return (
-          Math.floor(Math.random() * (Math.floor(9) - Math.ceil(1) + 1)) +
-          Math.ceil(1)
-        );
-      }
       let x = randomCoord();
       let y = randomCoord();
       if (
@@ -36,4 +30,11 @@ export function createPlayer(type) {
   };
 
   return player;
+}
+
+export function randomCoord() {
+  return (
+    Math.floor(Math.random() * (Math.floor(9) - Math.ceil(1) + 1)) +
+    Math.ceil(1)
+  );
 }
